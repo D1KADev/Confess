@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Code Play - Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-dark: #000;
+      --muted: #bdbdbd;
+      --accent: #2fd13a; /* hijau tombol */
+      --accent-2: #4ed2ff; /* soft blue */
+      --card-bg: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.06);
+      --max-width: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg-dark);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* ---------- NAV ---------- */
+    .nav{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:40;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 48px;
+      gap:20px;
+      background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0));
+      backdrop-filter: blur(2px);
+    }
+    .nav .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .nav .brand img{
+      width:44px;height:44px;border-radius:6px;border:2px solid rgba(255,255,255,0.12);
+      object-fit:cover;
+    }
+    .nav .brand h1{font-weight:600;margin:0;font-size:20px;color:#fff}
+    .nav .menu{
+      display:flex;gap:20px;align-items:center;
+    }
+    .nav .menu a{
+      color:#fff;text-decoration:none;opacity:0.95;font-weight:500;
+      padding:8px;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero{
+      height:560px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      position:relative;
+      margin-top:0;
+      overflow:hidden;
+    }
+    .hero__bg{
+      position:absolute;inset:0;background-size:cover;background-position:center;
+      filter:brightness(0.45);
+      z-index:0;
+    }
+    .hero__content{
+      position:relative;z-index:2;
+      max-width:var(--max-width);
+      padding:40px 24px;
+    }
+    .hero h2{
+      font-size:40px;margin:0 0 16px 0;letter-spacing:2px;font-weight:600;
+    }
+    .hero .sub{
+      margin:18px 0;color:rgba(255,255,255,0.9);letter-spacing:3px;
+      display:flex;gap:18px;justify-content:center;align-items:center;
+      flex-wrap:wrap;font-weight:500;
+    }
+    .btn-row{margin-top:24px;display:flex;gap:16px;justify-content:center}
+    .btn{
+      padding:10px 22px;border-radius:6px;font-weight:600;border:none;
+      cursor:pointer;display:inline-block;text-decoration:none;
+    }
+    .btn--primary{background:var(--accent);color:#042103;box-shadow:0 6px 16px rgba(47,209,58,0.18)}
+    .btn--ghost{background:#e8e8e8;color:#222}
+
+    /* ---------- INTRO TEXT ---------- */
+    .intro{
+      padding:50px 20px 18px;
+      text-align:center;
+      max-width:900px;margin:0 auto;color:#ddd;
+    }
+    .intro p{margin:0;font-size:15px}
+
+    /* ---------- SERVICES GRID ---------- */
+    .services{
+      max-width:1100px;margin:32px auto;padding:20px;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;
+    }
+    .card{
+      background:transparent;text-align:center;padding:12px;
+    }
+    .card .num{font-size:22px;color:#d46be6;font-weight:700;margin-bottom:8px}
+    .card img{width:180px;height:180px;object-fit:cover;border-radius:6px;border:6px solid rgba(255,255,255,0.06)}
+    .card h3{margin:12px 0 8px;font-size:16px}
+    .card p{color:#bdbdbd;font-size:13px;margin:0}
+
+    /* ---------- MIDDLE SECTION WITH SMALL IMAGES ---------- */
+    .middle{
+      padding:36px 20px 60px;
+      max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;
+    }
+    .middle .col{
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:12px;
+    }
+    .middle .col .small-row{
+      display:flex;gap:16px;align-items:center;
+    }
+    .avatar{
+      width:72px;height:72px;border-radius:8px;object-fit:cover;border:4px solid rgba(255,255,255,0.04);
+    }
+    .middle h4{color:#fff;margin:0 0 8px;font-size:18px}
+    .middle p{color:#cfcfcf;font-size:14px;margin:0}
+
+    /* ---------- FEATURE LIST + CTA ---------- */
+    .feature-cta{
+      margin:50px auto;max-width:900px;padding:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:40px;display:flex;align-items:center;gap:20px;
+    }
+    .feature-cta .left{flex:1}
+    .feature-cta h3{margin:0 0 8px;font-size:16px}
+    .feature-cta p{margin:0;color:#cfcfcf}
+    .feature-cta .cta-btn{background:var(--accent);color:#042103;padding:12px 22px;border-radius:30px;font-weight:700;border:none;cursor:pointer}
+
+    /* ---------- COMPANY LOGOS ---------- */
+    .partners{padding:36px 20px 60px;text-align:center;color:#ddd}
+    .partners .logos{display:flex;gap:28px;justify-content:center;align-items:center;margin-top:18px;flex-wrap:wrap}
+    .partners .logos img{width:64px;height:64px;object-fit:contain;border-radius:50%;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px}
+
+    /* ---------- FOOTER ---------- */
+    footer{
+      margin-top:20px;background:linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6));
+      padding:36px 20px;color:#fff;
+      background-image: url('images/hero.jpg'); /* ganti sesuai nama file */
+      background-size:cover;background-position:center;
+    }
+    .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start}
+    .footer h4{margin:0 0 12px;font-weight:600}
+    .footer p{color:#ddd;font-size:14px;margin:0 0 8px}
+
+    .newsletter{display:flex;gap:8px;align-items:center}
+    .newsletter input{padding:12px;border-radius:24px;border:none;outline:none;width:100%;max-width:320px}
+    .newsletter button{padding:10px 14px;border-radius:20px;border:none;background:#fff;color:#000;cursor:pointer}
+
+    .footer-bottom{text-align:center;padding:18px 0 0;color:#bfbfbf;font-size:13px}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width:900px){
+      .nav{padding:12px 20px}
+      .hero{height:520px}
+      .hero h2{font-size:32px}
+      .middle{grid-template-columns:1fr}
+      .footer-inner{grid-template-columns:1fr}
+      .services{gap:18px}
+    }
+    @media (max-width:480px){
+      .nav .menu{display:none}
+      .hero{height:480px}
+      .hero h2{font-size:28px}
+      .card img{width:140px;height:140px}
+      .feature-cta{flex-direction:column;align-items:flex-start;padding:20px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="brand">
+      <img src="images/logo.png" alt="logo">
+      <h1>Code Play</h1>
+    </div>
+    <nav class="menu" role="navigation" aria-label="Main navigation">
+      <a href="#">Home</a>
+      <a href="#">About us</a>
+      <a href="#">Service</a>
+      <a href="#">Blog</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero__bg" style="background-image:url('images/hero.jpg');"></div>
+    <div class="hero__content">
+      <h2>EXPERIENCE</h2>
+      <div class="sub">
+        <span>WEBSITE</span>
+        <span>-</span>
+        <span>DIGITAL MARKETING</span>
+        <span>-</span>
+        <span>BRANDING</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#services">Explore</a>
+        <a class="btn btn--ghost" href="#contact">Reach us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <p>
+      Suspendisse ut magna porttitor, sollicitudin ligula at, molestie dolor. Vivamus a ligula ut velit placerat egestas at id leo. Nulla ac volutpat nunc. Nulla facilisi. Pellentesque tempus tellusut magna porttitor scelerisque.
+    </p>
+  </section>
+
+  <!-- SERVICES GRID -->
+  <section id="services" class="services" aria-label="Our services">
+    <div class="card">
+      <div class="num">01</div>
+      <img src="images/thumb1.jpg" alt="web dev 1">
+      <h3>Web development</h3>
+      <p>Lorem ipsum dolor dang elite minem</p>
+    </div>
+
+    <div class="card">
+      <div class="num">02</div>
+      <img src="images/thumb2.jpg" alt="web dev 2">
+      <h3>Web development</h3>
+      <p>Lorem ipsum dolor dang elite minem</p>
+    </div>
+
+    <div class="card">
+      <div class="num">03</div>
+      <img src="images/thumb3.jpg" alt="web dev 3">
+      <h3>Web development</h3>
+      <p>Lorem ipsum dolor dang elite minem</p>
+    </div>
+
+    <div class="card">
+      <div class="num">04</div>
+      <img src="images/thumb4.jpg" alt="web dev 4">
+      <h3>Web development</h3>
+      <p>Lorem ipsum dolor dang elite minem</p>
+    </div>
+  </section>
+
+  <!-- MIDDLE: small images and captions -->
+  <section class="middle" aria-label="Details">
+    <div class="col">
+      <div class="small-row">
+        <img class="avatar" src="images/small1.jpg" alt="person">
+        <div>
+          <h4>Web development</h4>
+          <p>Deskripsi singkat untuk project dan hasil kerja.</p>
+        </div>
+      </div>
+
+      <div class="small-row" style="margin-top:18px">
+        <img class="avatar" src="images/small2.jpg" alt="person2">
+        <div>
+          <h4>Web development</h4>
+          <p>Contoh layout dan implementasi desain responsif.</p>
+        </div>
+      </div>
+
+      <!-- Repeated text blocks like screenshot -->
+      <div style="margin-top:20px;color:#cfcfcf;font-size:14px;line-height:1.5">
+        <strong>Deferent Layout</strong>
+        <p>Macnas aliquet mollis lectus: Vivamus conctue Nuus et tortor lorem in, nibh ipsum aptent</p>
+
+        <strong style="margin-top:12px;display:block">Deferent Layout</strong>
+        <p>Macnas aliquet mollis lectus: Vivamus conctue Nuus et tortor lorem in, nibh ipsum aptent</p>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="small-row" style="justify-content:flex-end">
+        <div>
+          <h4 style="text-align:right">Web development</h4>
+          <p style="text-align:right">Ringkasan project lain dan keterlibatan tim.</p>
+        </div>
+        <img class="avatar" src="images/small3.jpg" alt="person3">
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:18px">
+        <img class="avatar" src="images/small4.jpg" alt="person4">
+        <div style="margin-left:12px">
+          <h4 style="text-align:left">Web development</h4>
+          <p style="text-align:left">Deskripsi singkat project</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FEATURE -->
+  <section style="display:flex;justify-content:center;padding:0 20px 18px;">
+    <div class="feature-cta">
+      <div class="left">
+        <h3>Deferent Layout</h3>
+        <p>Macnas aliquet mollis lectus: Vivamus conctue Nuus et tortor lorem in, nibh ipsum aptent</p>
+      </div>
+      <div>
+        <button class="cta-btn">Contact Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="partners">
+    <h3>We proud of work with these companies</h3>
+    <div class="logos">
+      <img src="images/logo-apple.png" alt="apple">
+      <img src="images/logo-instagram.png" alt="ig">
+      <img src="images/logo-video.png" alt="video1">
+      <img src="images/logo-video2.png" alt="video2">
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-inner footer">
+      <div>
+        <h4>Code Play</h4>
+        <p>Reinventing the way of creating websites, we aim to create the most master-peaced WordPress theme available on the market.</p>
+      </div>
+
+      <div>
+        <h4>Contact Us</h4>
+        <p>232 Helge Springs Rd. Crawford TN 38554</p>
+        <p>Call Us: 5898009878</p>
+        <p>jow@company.com</p>
+      </div>
+
+      <div>
+        <h4>Sign Up for Updates</h4>
+        <div class="newsletter">
+          <input type="email" placeholder="Your email address" aria-label="email">
+          <button aria-label="submit">✈</button>
+        </div>
+        <p style="margin-top:10px;color:#cfcfcf;font-size:13px">Sign up with your email address to receive news and updates</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      Copyright ©21123 Code Play. All rights reserved &nbsp; · &nbsp;
+      <a href="#" style="color:var(--muted);text-decoration:none">Home</a> &nbsp; · &nbsp;
+      <a href="#" style="color:var(--muted);text-decoration:none">About us</a>
+    </div>
+  </footer>
+
+</body>
+</html>

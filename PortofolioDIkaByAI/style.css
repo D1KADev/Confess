@@ -1,0 +1,188 @@
+/* ========== IMPORT FONT ========== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Poppins:wght@300;400;500;700&display=swap');
+
+/* ---------- GLOBAL ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ========== NAVBAR ========== */
+nav {
+    width: 100%;
+    padding: 25px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+}
+
+nav h2 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+nav ul li a {
+    font-size: 16px;
+    font-weight: 500;
+    transition: .3s;
+}
+
+nav ul li a:hover {
+    color: #007bff;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+    height: 100vh;
+    width: 100%;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-left h1 {
+    font-size: 60px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hero-left h1 span {
+    color: #007bff;
+}
+
+.hero-left p {
+    margin: 20px 0;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.hero-left .btn {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 12px 32px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border-radius: 30px;
+    transition: .3s;
+}
+
+.hero-left .btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0, 123, 255, 0.4);
+}
+
+/* ========== SOCIAL ICONS ========== */
+.social {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.social a i {
+    font-size: 22px;
+    transition: .3s;
+}
+
+.social a:hover i {
+    color: #007bff;
+    transform: scale(1.2);
+}
+
+/* ========== PROFILE IMAGE ========== */
+.hero-right img {
+    width: 330px;
+    border-radius: 50%;
+    border: 6px solid #007bff;
+    box-shadow: 0 0 30px rgba(0, 123, 255, 0.3);
+    animation: float 3.5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+}
+
+/* ========== SECTION JARAK ========== */
+section {
+    padding: 80px 8%;
+}
+
+/* ========== SCHOOL SECTION ========== */
+.school {
+    background: white;
+    margin-top: 40px;
+    padding: 80px 8%;
+    border-radius: 25px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+}
+
+.school h2 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.school p {
+    font-size: 17px;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+    .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 30px;
+        padding-top: 120px;
+    }
+
+    .hero-left h1 {
+        font-size: 45px;
+    }
+
+    .hero-right img {
+        width: 250px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding: 20px 6%;
+    }
+
+    nav ul {
+        display: none; /* nanti kalau mau menu burger tinggal aktifin */
+    }
+
+    .hero-left h1 {
+        font-size: 36px;
+    }
+}
